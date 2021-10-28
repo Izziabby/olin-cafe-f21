@@ -1,0 +1,39 @@
+[*]
+[*] GTKWave Analyzer v3.3.106 (w)1999-2020 BSI
+[*] Thu Oct 28 01:39:30 2021
+[*]
+[dumpfile] "/home/avinash/src/cafe-instructors/hws/6/parallel_to_serial_converter.fst"
+[dumpfile_mtime] "Thu Oct 28 01:38:55 2021"
+[dumpfile_size] 729
+[savefile] "/home/avinash/src/cafe-instructors/hws/6/parallel_to_serial_converter.gtkw"
+[timestart] 0
+[size] 2560 1440
+[pos] -1 -1
+*-16.000000 142500 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] test_parallel_to_serial_register.
+[sst_width] 291
+[signals_width] 162
+[sst_expanded] 1
+[sst_vpaned_height] 427
+@28
+test_parallel_to_serial_register.UUT.rst
+test_parallel_to_serial_register.UUT.clk
+test_parallel_to_serial_register.UUT.direction
+test_parallel_to_serial_register.UUT.i_data[7:0]
+test_parallel_to_serial_register.UUT.i_valid
+test_parallel_to_serial_register.UUT.out
+@800029
+test_parallel_to_serial_register.UUT.q[7:0]
+@29
+(0)test_parallel_to_serial_register.UUT.q[7:0]
+(1)test_parallel_to_serial_register.UUT.q[7:0]
+(2)test_parallel_to_serial_register.UUT.q[7:0]
+(3)test_parallel_to_serial_register.UUT.q[7:0]
+(4)test_parallel_to_serial_register.UUT.q[7:0]
+(5)test_parallel_to_serial_register.UUT.q[7:0]
+(6)test_parallel_to_serial_register.UUT.q[7:0]
+(7)test_parallel_to_serial_register.UUT.q[7:0]
+@1001201
+-group_end
+[pattern_trace] 1
+[pattern_trace] 0
