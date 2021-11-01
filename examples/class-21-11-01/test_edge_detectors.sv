@@ -16,8 +16,11 @@ initial begin
   $dumpvars(0, UUT_MEALY);
   $dumpvars(0, UUT_MOORE);
 
+  repeat (2) @(negedge clk);
+  rst = 0;
+
   for(int i = 0; i < 10; i = i + 1) begin
-    delay = $random;
+    delay = $random + 1;
     repeat (delay) @(negedge clk);
     in = ~in; // toggle input
   end

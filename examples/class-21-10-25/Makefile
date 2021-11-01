@@ -2,7 +2,6 @@
 # -g2012 selects the 2012 version of iVerilog
 IVERILOG=iverilog -Wall -g2012 -y ./ -I ./
 VVP=vvp
-
 # Look up .PHONY rules for Makefiles
 .PHONY: clean
 
