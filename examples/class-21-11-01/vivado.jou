@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2021.1 (64-bit)
+# SW Build 3247384 on Thu Jun 10 19:36:07 MDT 2021
+# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
+# Start of session at: Mon Nov  1 18:52:54 2021
+# Process ID: 32207
+# Current directory: /home/iabilheira/Documents/izzie-cafe-f21/examples/class-21-11-01
+# Command line: vivado -mode batch -source program.tcl
+# Log file: /home/iabilheira/Documents/izzie-cafe-f21/examples/class-21-11-01/vivado.log
+# Journal file: /home/iabilheira/Documents/izzie-cafe-f21/examples/class-21-11-01/vivado.jou
+#-----------------------------------------------------------
+source program.tcl

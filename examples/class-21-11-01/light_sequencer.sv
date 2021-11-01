@@ -51,7 +51,7 @@ end
 
 always_comb begin : moore_outputs
   case(state)
-    S_RED: rgb = 3'b001;
+    S_RED: rgb = 3'b011;
     S_GREEN: rgb = 3'b101;
     S_BLUE: rgb = 3'b110;
     S_ERROR: rgb = 3'b000;

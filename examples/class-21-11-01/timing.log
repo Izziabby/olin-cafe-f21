@@ -1,0 +1,61 @@
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2021.1 (lin64) Build 3247384 Thu Jun 10 19:36:07 MDT 2021
+| Date         : Mon Nov  1 18:52:42 2021
+| Host         : iabilheira running 64-bit Ubuntu 20.04.3 LTS
+| Command      : report_timing -sort_by group -max_paths 100 -path_type summary -file timing.log
+| Design       : light_sequencer
+| Device       : 7a15t-cpg236
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+-------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Startpoint                     Endpoint                       Slack(ns)     
+----------------------------------------------------------------------------
+DEBOUNCE/counter_reg[5]/C      DEBOUNCE/counter_reg[6]/D      80.326        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[3]/CE     80.453        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[4]/CE     80.453        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[5]/CE     80.453        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[6]/CE     80.639        
+DEBOUNCE/counter_reg[0]/C      DEBOUNCE/counter_reg[4]/D      80.787        
+DEBOUNCE/counter_reg[6]/C      DEBOUNCE/FSM_sequential_state_reg[0]/D
+                                                              80.819        
+DEBOUNCE/counter_reg[6]/C      DEBOUNCE/FSM_sequential_state_reg[1]/D
+                                                              80.839        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[0]/CE     80.884        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[1]/CE     80.884        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[2]/CE     80.884        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[7]/CE     80.884        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[8]/CE     80.884        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[3]/D      81.124        
+DEBOUNCE/counter_reg[5]/C      DEBOUNCE/counter_reg[7]/D      81.166        
+DEBOUNCE/counter_reg[0]/C      DEBOUNCE/counter_reg[5]/D      81.175        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               DEBOUNCE/counter_reg[8]/D      81.282        
+DEBOUNCE/counter_reg[0]/C      DEBOUNCE/counter_reg[0]/D      81.354        
+DEBOUNCE/counter_reg[0]/C      DEBOUNCE/counter_reg[1]/D      81.374        
+DEBOUNCE/FSM_sequential_state_reg[1]/C
+                               EDGE_DETECTOR/FSM_sequential_state_reg[0]/D
+                                                              81.660        
+EDGE_DETECTOR/FSM_sequential_state_reg[1]/C
+                               EDGE_DETECTOR/FSM_sequential_state_reg[1]/D
+                                                              81.764        
+DEBOUNCE/FSM_sequential_state_reg[0]/C
+                               DEBOUNCE/counter_reg[2]/D      81.860        
+EDGE_DETECTOR/FSM_sequential_state_reg[1]/C
+                               FSM_sequential_state_reg[0]/D  81.929        
+FSM_sequential_state_reg[1]/C  FSM_sequential_state_reg[1]/D  81.972        
+
+
+
