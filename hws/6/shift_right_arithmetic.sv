@@ -9,5 +9,6 @@ output wire [N-1:0] out; // The same as SRL, but maintain the sign bit (MSB) aft
 // fill them in with the sign bit.
 // Remember the *repetition operator*: {n{bits}} will repeat bits n times.
 
+assign out = in >>> shamt;
 
 endmodule

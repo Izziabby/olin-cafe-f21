@@ -6,5 +6,6 @@ input  wire [N-1:0] in;    // A 32 bit input
 input  wire [$clog2(N)-1:0] shamt; // Amount we shift by.
 output wire [N-1:0] out;  // Output.
 
+assign out = in >> shamt;
 
 endmodule
