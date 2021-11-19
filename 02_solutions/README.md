@@ -1,5 +1,11 @@
 # Lab 2: Etch a Sketch
 
+  Understanding HDL: I annotated i2c_controller.sv
+
+  Understanding FSM's: I annotated ili9341_display_controller.sv
+
+  I changed the cursor color to PINK!
+
 In this lab we're going to build logic to make an "etch a sketch" or sketchpad hardware device. Over the course of the lab you will learn how to:
 * Design your own specifications for complex sequential and combinational logic blocks.
 * Implement controllers for the popular SPI and i2c serial interfaces.

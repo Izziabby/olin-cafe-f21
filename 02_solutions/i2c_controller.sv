@@ -55,59 +55,59 @@ logic [7:0] data_buffer;
 always_ff @(posedge clk) begin : i2c_fsm  
   if(rst) begin
     clk_divider_counter <= DIVIDER_COUNT-1;
-    scl <= 1;
+    scl <= 1; //scl high for start marker
     bit_counter <= 0;
     o_data <= 0;
     o_valid <= 0;
-    i_ready <= 1;
-    state <= S_IDLE;
+    i_ready <= 1; //data is ready
+    state <= S_IDLE; //wait for data
   end else begin // out of reset
 // SOlUTION START
     if(state == S_IDLE) begin
-      if(i_valid & i_ready) begin
-        i_ready <= 0;
-        cooldown_counter <= COOLDOWN_CYCLES;
-        o_valid <= 0;
-        state <= S_START;
-        addr_buffer <= {i_addr, mode};
-        data_buffer <= i_data;
+      if(i_valid & i_ready) begin //if data is sent
+        i_ready <= 0; //set low to prevent other data from being sent
+        cooldown_counter <= COOLDOWN_CYCLES; //wait a few clk cycles
+        o_valid <= 0; 
+        state <= S_START; //start controller
+        addr_buffer <= {i_addr, mode}; //creates address and read/write section of the bitstring
+        data_buffer <= i_data; //creates data section
         bit_counter <= 7;
-        clk_divider_counter <= DIVIDER_COUNT-1;
+        clk_divider_counter <= DIVIDER_COUNT-1; //set clk to max value
       end
       else begin
-        scl <= 1;
-        if(cooldown_counter > 0) begin
+        scl <= 1; //set high to start
+        if(cooldown_counter > 0) begin //add space between signals
           i_ready <= 0;
           cooldown_counter <= cooldown_counter - 1;
         end else begin
-          i_ready <= 1;
+          i_ready <= 1; //ready for data
         end
       end
     end else begin // handle all non-idle state here
     if (clk_divider_counter == 0) begin
-      clk_divider_counter <= DIVIDER_COUNT-1;
-      scl <= ~scl;
+      clk_divider_counter <= DIVIDER_COUNT-1; 
+      scl <= ~scl; //create oscillation of serial clock
       case(state)
         S_START: begin
-          state <= S_ADDR;
+          state <= S_ADDR; //once started, go to address state
         end
         S_ADDR: begin
           if(scl) begin // negative edge logic
-            if(bit_counter > 0) bit_counter <= bit_counter - 1;
+            if(bit_counter > 0) bit_counter <= bit_counter - 1; //increment counter
           // end else begin // positive edge logic
-            if(bit_counter == 0) state <= S_ACK_ADDR;
+            if(bit_counter == 0) state <= S_ACK_ADDR; //once all bits read/write, move to acknowledge
           end
         end
         S_ACK_ADDR: begin
           // $display("[i2c controller] waiting for ack on address 0x%h, addr[0] = %b", addr_buffer[7:1], addr_buffer[0]);
           //if(~sda) begin
-            bit_counter <= 7;
-            case(addr_buffer[0]) 
+            bit_counter <= 7; //rest counter
+            case(addr_buffer[0]) //read or write 
               WRITE_8BIT_REGISTER : begin
-                if(scl) state <= S_WR_DATA;
+                if(scl) state <= S_WR_DATA; //writing mode
               end
               READ_8BIT : begin
-                if(~scl) state <= S_RD_DATA;
+                if(~scl) state <= S_RD_DATA; //reading mode
               end
             endcase
           //end
@@ -121,34 +121,34 @@ always_ff @(posedge clk) begin : i2c_fsm
         end
 
         S_RD_DATA : begin
-          if(~scl) begin
-            data_buffer[0] <= sda;
-            data_buffer[7:1] <= data_buffer[6:0];
+          if(~scl) begin //pos edge logic
+            data_buffer[0] <= sda; //set sda
+            data_buffer[7:1] <= data_buffer[6:0]; //shift other bits to left for sda
             if(bit_counter > 0) begin
-              bit_counter <= bit_counter - 1;
+              bit_counter <= bit_counter - 1; //increment counter
             end
             else begin
-              state <= S_ACK_RD;
+              state <= S_ACK_RD; //after all sent, move to acknowledge
             end
           end
         end
         S_ACK_RD : begin
           if(~scl) begin // positive edge
-            state <= S_STOP;
-            o_data <= data_buffer;
-            o_valid <= 1;
+            state <= S_STOP; //stop controller logic
+            o_data <= data_buffer; //set data
+            o_valid <= 1; //data is valid
           end
         end
         S_WR_DATA: begin
           if(scl) begin // negative edge logic
-            bit_counter <= bit_counter - 1;
+            bit_counter <= bit_counter - 1; //increment counter
             if(bit_counter > 0) begin  
               // data_buffer[0] <= 1'b1; // Shift in ones to leave SDA as default high. More for the prettiness of the waveform, it shouldn't matter.
-              data_buffer[7:1] <= data_buffer[6:0];
+              data_buffer[7:1] <= data_buffer[6:0]; //shift data to left
             end
           end
           else if(&bit_counter) begin
-              state <= S_ACK_WR;
+              state <= S_ACK_WR; //move to acknowledge
           end
         end
         S_ACK_WR: begin
@@ -178,15 +178,15 @@ end
 
 // SOLUTION START
 always_comb case(state)
-  S_START, S_ADDR, S_WR_DATA, S_ACK_RD: sda_oe = 1;
-  default : sda_oe = 0;
+  S_START, S_ADDR, S_WR_DATA, S_ACK_RD: sda_oe = 1; //send
+  default : sda_oe = 0; //default "high impedance" - secondary's turn to talk
 endcase
 
 always_comb case(state)
   S_START: sda_out = 0; // Start signal.
-  S_ADDR: sda_out = addr_buffer[bit_counter[2:0]];
+  S_ADDR: sda_out = addr_buffer[bit_counter[2:0]]; //address set as bit counter increments
   S_WR_DATA : sda_out = data_buffer[7]; //data_buffer[bit_counter];
-  S_ACK_RD : sda_out = 0;
+  S_ACK_RD : sda_out = 0; //acknowlegement that data has been received
   default : sda_out = 0; //TODO
 endcase
 // SOLUTION END
