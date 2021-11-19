@@ -18,7 +18,7 @@ initial begin
   $readmemh(INIT, ram); // Initializes the ROM with the values in the init file.
 end
 
-always_ff @(posedge clk) begin : synthesizable_ram
+always_ff @(posedge clk) begin : synthesizable_rom
   rd_data <= ram[rd_addr];
   if(wr_ena) begin
     ram[wr_addr] <= wr_data;

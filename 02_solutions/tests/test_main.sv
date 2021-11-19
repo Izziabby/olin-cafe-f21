@@ -1,6 +1,6 @@
 `timescale 1ns / 100ps
 `default_nettype none
-`define SIMULATION
+
 module test_main;
 parameter CLK_HZ = 12_000_000;
 parameter CLK_PERIOD_NS = (1_000_000_000/CLK_HZ); // Approximation.
